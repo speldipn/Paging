@@ -50,17 +50,6 @@ class DataSource(private val pokeApi: PokeAPI) : PageKeyedDataSource<String, Res
     }
   }
 
-  private fun parseQuery(url: String): MutableMap<String, String> {
-    val queryPart = url.split("?")[1]
-    val queries = queryPart.split("&")
-    val map = mutableMapOf<String, String>()
-    for (query in queries) {
-      val parts = query.split("=")
-      map[parts[0]] = parts[1]
-    }
-    return map
-  }
-
   override fun loadAfter(params: LoadParams<String>, callback: LoadCallback<String, Result>) {
     val offset = parseQuery(params.key)["offset"]!!
     val limit = parseQuery(params.key)["limit"]!!
@@ -82,4 +71,16 @@ class DataSource(private val pokeApi: PokeAPI) : PageKeyedDataSource<String, Res
       e.printStackTrace()
     }
   }
+
+  private fun parseQuery(url: String): MutableMap<String, String> {
+    val queryPart = url.split("?")[1]
+    val queries = queryPart.split("&")
+    val map = mutableMapOf<String, String>()
+    for (query in queries) {
+      val parts = query.split("=")
+      map[parts[0]] = parts[1]
+    }
+    return map
+  }
+
 }
