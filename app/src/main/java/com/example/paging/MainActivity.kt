@@ -15,8 +15,14 @@ import retrofit2.converter.gson.GsonConverterFactory
 class MainActivity : AppCompatActivity() {
 
   lateinit var binding: ActivityMainBinding
-  lateinit var pokeApi: PokeAPI
-  lateinit var adapter: MainAdapter
+  private val pokeApi by lazy {
+    Retrofit.Builder()
+      .baseUrl("https://pokepokeApi.co/pokeApi/v2/")
+      .addConverterFactory(GsonConverterFactory.create())
+      .build()
+      .create(PokeAPI::class.java)
+  }
+  private val adapter by lazy { MainAdapter() }
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -31,15 +37,9 @@ class MainActivity : AppCompatActivity() {
   }
 
   private fun setupAPI() {
-    pokeApi = Retrofit.Builder()
-      .baseUrl("https://pokepokeApi.co/pokeApi/v2/")
-      .addConverterFactory(GsonConverterFactory.create())
-      .build()
-      .create(PokeAPI::class.java)
   }
 
   private fun setupAdapter() {
-    val adapter = MainAdapter()
     binding.recyclerView.adapter = adapter
   }
 
