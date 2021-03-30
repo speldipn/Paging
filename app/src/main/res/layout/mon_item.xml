@@ -4,7 +4,14 @@
   <LinearLayout
       android:layout_width="match_parent"
       android:layout_height="100dp"
-      android:orientation="vertical">
+      android:gravity="center"
+      android:orientation="horizontal">
+
+    <com.facebook.drawee.view.SimpleDraweeView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:adjustViewBounds="true" />
 
     <TextView
         android:id="@+id/monTextView"
