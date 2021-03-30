@@ -9,20 +9,17 @@ import androidx.paging.DataSource.Factory
 import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
 import com.example.paging.databinding.ActivityMainBinding
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 class MainActivity : AppCompatActivity() {
 
-  lateinit var binding: ActivityMainBinding
-  private val pokeApi by lazy {
-    Retrofit.Builder()
-      .baseUrl("https://pokepokeApi.co/pokeApi/v2/")
-      .addConverterFactory(GsonConverterFactory.create())
-      .build()
-      .create(PokeAPI::class.java)
-  }
   private val adapter by lazy { MainAdapter() }
+  private lateinit var pokeApi: PokeAPI
+
+  lateinit var binding: ActivityMainBinding
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -33,11 +30,25 @@ class MainActivity : AppCompatActivity() {
   private fun setup() {
     setupAPI()
     setupAdapter()
-    createLiveData().observe(this, Observer { result -> adapter.submitList(result) })
+    createLiveData().observe(this, Observer { result ->
+      adapter.submitList(result)
+    })
   }
 
   private fun setupAPI() {
+    val httpClient = OkHttpClient.Builder().addInterceptor(
+      HttpLoggingInterceptor().apply { level = HttpLoggingInterceptor.Level.BODY }
+    ).build()
+
+    pokeApi = Retrofit.Builder()
+      .client(httpClient)
+      .baseUrl("https://pokeapi.co/api/v2/")
+      .addConverterFactory(GsonConverterFactory.create())
+      .build()
+      .create(PokeAPI::class.java)
+
   }
+
 
   private fun setupAdapter() {
     binding.recyclerView.adapter = adapter
