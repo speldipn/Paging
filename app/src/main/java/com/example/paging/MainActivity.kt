@@ -49,7 +49,6 @@ class MainActivity : AppCompatActivity() {
 
   }
 
-
   private fun setupAdapter() {
     binding.recyclerView.adapter = adapter
   }
@@ -57,8 +56,8 @@ class MainActivity : AppCompatActivity() {
   private fun createLiveData(): LiveData<PagedList<Result>> {
     // Paging configuration
     val config = PagedList.Config.Builder()
-      .setInitialLoadSizeHint(20) //  at first size
-      .setPageSize(20) // default page size
+      .setInitialLoadSizeHint(20) //  first size
+      .setPageSize(20) // count page size
       .setPrefetchDistance(10) // pageSize - sePrefetchDistance = 10(prefetch interval)
       .build()
 
@@ -69,4 +68,5 @@ class MainActivity : AppCompatActivity() {
       }
     }, config).build()
   }
+
 }
