@@ -3,11 +3,11 @@ package com.example.paging
 import androidx.recyclerview.widget.RecyclerView
 import com.example.paging.databinding.MonItemBinding
 
-class MainViewHolder: RecyclerView.ViewHolder {
+class MainViewHolder : RecyclerView.ViewHolder {
 
   private val viewModel: ViewModel = ViewModel()
 
-  constructor(binding: MonItemBinding): super(binding.root){
+  constructor(binding: MonItemBinding) : super(binding.root) {
     binding.viewModel = viewModel
   }
 
@@ -19,8 +19,9 @@ class MainViewHolder: RecyclerView.ViewHolder {
     }
     val id = tokens.last()
 
-    viewModel.name.set(data.name)
-    viewModel.url.set(data.url)
-    viewModel.imageUrl.set("https://pokeres.bastionbot.org/images/pokemon/$id.png")
+    viewModel.name.postValue(data.name)
+    viewModel.url.postValue(data.url)
+    viewModel.imageUrl.postValue("https://pokeres.bastionbot.org/images/pokemon/$id.png")
   }
+
 }

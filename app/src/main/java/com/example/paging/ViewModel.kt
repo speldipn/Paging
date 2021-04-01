@@ -1,9 +1,9 @@
 package com.example.paging
 
-import androidx.databinding.ObservableField
+import androidx.lifecycle.MutableLiveData
 
 class ViewModel {
-  var name = ObservableField<String>()
-  var url = ObservableField<String>()
-  var imageUrl = ObservableField<String>()
+  var name = MutableLiveData<String>()
+  var url = MutableLiveData<String>()
+  var imageUrl = MutableLiveData<String>()
 }
