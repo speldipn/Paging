@@ -3,8 +3,14 @@ package com.example.paging
 import androidx.recyclerview.widget.RecyclerView
 import com.example.paging.databinding.MonItemBinding
 
-class MainViewHolder(val binding: MonItemBinding) :
-  RecyclerView.ViewHolder(binding.root) {
+class MainViewHolder: RecyclerView.ViewHolder {
+
+  private val viewModel: ViewModel = ViewModel()
+
+  constructor(binding: MonItemBinding): super(binding.root){
+    binding.viewModel = viewModel
+  }
+
   fun setData(data: Result) {
     val tokens = if (data.url.endsWith("/")) {
       data.url.dropLast(1).split("/")
@@ -12,7 +18,9 @@ class MainViewHolder(val binding: MonItemBinding) :
       data.url.split("/")
     }
     val id = tokens.last()
-    binding.imageView.setImageURI("https://pokeres.bastionbot.org/images/pokemon/$id.png")
-    binding.monTextView.text = data.name
+
+    viewModel.name.set(data.name)
+    viewModel.url.set(data.url)
+    viewModel.imageUrl.set("https://pokeres.bastionbot.org/images/pokemon/$id.png")
   }
 }

@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+  <data>
+
+    <variable
+        name="viewModel"
+        type="com.example.paging.ViewModel" />
+  </data>
 
   <LinearLayout
       android:layout_width="match_parent"
@@ -9,18 +17,31 @@
 
     <com.facebook.drawee.view.SimpleDraweeView
         android:id="@+id/imageView"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:adjustViewBounds="true" />
+        android:layout_weight="1"
+        app:actualImageScaleType="fitCenter"
+        android:src="@{viewModel.imageUrl}" />
 
     <TextView
         android:id="@+id/monTextView"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="match_parent"
+        android:layout_weight="1"
         android:gravity="center"
+        android:text="@{viewModel.name}"
         android:textColor="@color/white"
-        android:textSize="30sp" />
+        android:textSize="20sp" />
 
+    <TextView
+        android:id="@+id/urlTextView"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="@{viewModel.url}"
+        android:textColor="@color/white"
+        android:textSize="12sp" />
   </LinearLayout>
 
 </layout>

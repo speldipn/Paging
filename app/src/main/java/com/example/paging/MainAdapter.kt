@@ -15,8 +15,8 @@ private val diffItem = object : DiffUtil.ItemCallback<Result>() {
     oldItem.name == newItem.name && oldItem.url == newItem.url
 }
 
-class MainAdapter :
-  PagedListAdapter<Result, MainViewHolder>(diffItem) {
+class MainAdapter : PagedListAdapter<Result, MainViewHolder>(diffItem) {
+
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainViewHolder {
     val binding: MonItemBinding = DataBindingUtil.inflate(
       LayoutInflater.from(parent.context),
