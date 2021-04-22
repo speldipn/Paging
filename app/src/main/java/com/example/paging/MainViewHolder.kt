@@ -19,9 +19,9 @@ class MainViewHolder : RecyclerView.ViewHolder {
     }
     val id = tokens.last()
 
-    viewModel.name.postValue(data.name)
-    viewModel.url.postValue(data.url)
-    viewModel.imageUrl.postValue("https://pokeres.bastionbot.org/images/pokemon/$id.png")
+    viewModel.name.setValue(data.name)
+    viewModel.url.setValue(data.url)
+    viewModel.imageUrl.setValue("https://pokeres.bastionbot.org/images/pokemon/$id.png")
   }
 
 }
