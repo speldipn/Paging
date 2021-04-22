@@ -36,7 +36,7 @@ class DataSource(private val pokeApi: PokeAPI) : PageKeyedDataSource<String, Res
       pokeApi.listPokemons(offset, limit).enqueue(object : Callback<Response> {
         override fun onResponse(call: Call<Response>, response: retrofit2.Response<Response>) {
           response.body()?.let {
-            callback.onResult(it.results, it.previous)
+            callback.onResult(it.results, it.next)
           }
         }
 
