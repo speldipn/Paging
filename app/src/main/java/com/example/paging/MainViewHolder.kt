@@ -4,7 +4,7 @@ import androidx.databinding.ObservableField
 import androidx.recyclerview.widget.RecyclerView
 import com.example.paging.databinding.MonItemBinding
 
-class MainViewHolder(private val binding: MonItemBinding) : RecyclerView.ViewHolder(binding.root) {
+class MainViewHolder(binding: MonItemBinding) : RecyclerView.ViewHolder(binding.root) {
 
   val name = ObservableField<String>()
   val url = ObservableField<String>()
