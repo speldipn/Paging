@@ -32,7 +32,6 @@ class MainActivity : AppCompatActivity() {
     setupAPI()
     setupAdapter()
     createLiveData().observe(this, Observer { result ->
-      Log.d("speldipn", "${result}")
       adapter.submitList(result)
       adapter.notifyDataSetChanged()
     })

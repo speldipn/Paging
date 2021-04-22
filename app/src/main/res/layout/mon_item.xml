@@ -3,10 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
   <data>
-
     <variable
-        name="viewModel"
-        type="com.example.paging.ViewModel" />
+        name="data"
+        type="com.example.paging.MainViewHolder" />
   </data>
 
   <LinearLayout
@@ -19,6 +18,7 @@
         android:id="@+id/imageView"
         android:layout_width="0dp"
         android:layout_height="match_parent"
+        android:src="@{data.imageUrl}"
         android:layout_weight="1"
         app:actualImageScaleType="fitCenter" />
 
@@ -27,6 +27,7 @@
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
+        android:text="@{data.name}"
         android:gravity="center"
         android:textColor="@color/white"
         android:textSize="20sp" />
@@ -36,6 +37,7 @@
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
+        android:text="@{data.url}"
         android:gravity="center"
         android:textColor="@color/white"
         android:textSize="12sp" />

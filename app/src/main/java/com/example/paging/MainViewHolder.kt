@@ -1,15 +1,18 @@
 package com.example.paging
 
+import androidx.databinding.ObservableField
 import androidx.recyclerview.widget.RecyclerView
 import com.example.paging.databinding.MonItemBinding
 
 class MainViewHolder(private val binding: MonItemBinding) : RecyclerView.ViewHolder(binding.root) {
 
-//  private val viewModel: ViewModel = ViewModel()
+  val name = ObservableField<String>()
+  val url = ObservableField<String>()
+  val imageUrl = ObservableField<String>()
 
-//  init {
-//    binding.viewModel = viewModel
-//  }
+  init {
+    binding.data = this
+  }
 
   fun setData(data: Result) {
     val tokens = if (data.url.endsWith("/")) {
@@ -19,9 +22,14 @@ class MainViewHolder(private val binding: MonItemBinding) : RecyclerView.ViewHol
     }
     val id = tokens.last()
 
-    binding.monTextView.text = data.name
-    binding.urlTextView.text = data.url
-    binding.imageView.setImageURI("https://pokeres.bastionbot.org/images/pokemon/$id.png")
+    name.set(data.name)
+    url.set(data.url)
+    imageUrl.set("https://pokeres.bastionbot.org/images/pokemon/$id.png")
+
+//    basic data binding
+//    binding.imageView.setImageURI("https://pokeres.bastionbot.org/images/pokemon/$id.png")
+//    binding.monTextView.text = data.name
+//    binding.urlTextView.text = data.url
   }
 
 }
