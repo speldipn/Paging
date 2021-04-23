@@ -1,7 +1,6 @@
 package com.example.paging
 
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.LiveData
@@ -33,7 +32,6 @@ class MainActivity : AppCompatActivity() {
     setupAdapter()
     createLiveData().observe(this, Observer { result ->
       adapter.submitList(result)
-      adapter.notifyDataSetChanged()
     })
   }
 
