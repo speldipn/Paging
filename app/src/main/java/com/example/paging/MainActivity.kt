@@ -16,10 +16,21 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class MainActivity : AppCompatActivity() {
 
+  private lateinit var binding: ActivityMainBinding
   private val adapter by lazy { MainAdapter() }
-  private lateinit var pokeApi: PokeAPI
-
-  lateinit var binding: ActivityMainBinding
+  private val httpClient by lazy {
+    OkHttpClient.Builder().addInterceptor(
+      HttpLoggingInterceptor().apply { level = HttpLoggingInterceptor.Level.BODY }
+    ).build()
+  }
+  private val pokeApi by lazy {
+    Retrofit.Builder()
+      .client(httpClient)
+      .baseUrl("https://pokeapi.co/api/v2/")
+      .addConverterFactory(GsonConverterFactory.create())
+      .build()
+      .create(PokeAPI::class.java)
+  }
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -28,25 +39,10 @@ class MainActivity : AppCompatActivity() {
   }
 
   private fun setup() {
-    setupAPI()
     setupAdapter()
     createLiveData().observe(this, Observer { result ->
       adapter.submitList(result)
     })
-  }
-
-  private fun setupAPI() {
-    val httpClient = OkHttpClient.Builder().addInterceptor(
-      HttpLoggingInterceptor().apply { level = HttpLoggingInterceptor.Level.BODY }
-    ).build()
-
-    pokeApi = Retrofit.Builder()
-      .client(httpClient)
-      .baseUrl("https://pokeapi.co/api/v2/")
-      .addConverterFactory(GsonConverterFactory.create())
-      .build()
-      .create(PokeAPI::class.java)
-
   }
 
   private fun setupAdapter() {
